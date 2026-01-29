@@ -1,135 +1,91 @@
+<?php
+// default.php – coming soon (multi-language)
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Coming Soon</title>
+<meta charset="UTF-8">
+<title>Coming Soon</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * {
+    box-sizing: border-box;
+  }
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Roboto, Helvetica, Arial, sans-serif;
+    color: #111;
+  }
 
-        body {
-            margin: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: #F4F5FF;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'DM Sans', sans-serif;
-        }
+  #text {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fadeUp 0.8s ease forwards;
+    text-align: center;
+  }
 
-        .container {
-            text-align: center;
-            padding: 24px;
-            max-width: 520px;
-            width: 100%;
-        }
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-        h1 {
-            font-size: 36px;
-            font-weight: 700;
-            color: #36344D;
-            margin-bottom: 16px;
-            min-height: 44px;
-            animation: fade 2.5s ease-in-out infinite;
-        }
-
-        p {
-            font-size: 16px;
-            color: #727586;
-            line-height: 1.6;
-            margin-bottom: 32px;
-        }
-
-        .divider {
-            width: 60px;
-            height: 4px;
-            background-color: #673DE6;
-            margin: 0 auto 32px;
-            border-radius: 2px;
-        }
-
-        form {
-            display: flex;
-            gap: 12px;
-            flex-direction: column;
-        }
-
-        input[type="email"] {
-            padding: 14px 16px;
-            border-radius: 8px;
-            border: 1px solid #D6D8F0;
-            font-size: 15px;
-            outline: none;
-        }
-
-        input[type="email"]:focus {
-            border-color: #673DE6;
-        }
-
-        button {
-            padding: 14px 16px;
-            border-radius: 8px;
-            border: none;
-            background-color: #673DE6;
-            color: white;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #5a33d6;
-        }
-
-        @keyframes fade {
-            0% { opacity: 0; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-    </style>
+  .fade {
+    animation: fadeUp 0.6s ease forwards;
+  }
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <h1 id="hello-text">Coming Soon</h1>
 
-        <p>
-            We’re building something meaningful.  
-            Leave your email and be the first to know.
-        </p>
+<div id="text">Coming Soon</div>
 
-        <div class="divider"></div>
+<script>
+  const phrases = [
+    "Coming Soon",
+    "قريباً",
+    "Próximamente",
+    "Bientôt disponible",
+    "Prossimamente",
+    "Kommt bald",
+    "近日公開",
+    "곧 공개",
+    "Em breve",
+    "Скоро"
+  ];
 
-        <form method="POST" action="#">
-            <!-- Replace action with your backend endpoint -->
-            <input type="email" name="email" placeholder="Your email address" required />
-            <button type="submit">Notify Me</button>
-        </form>
-    </div>
+  const textEl = document.getElementById("text");
+  let index = 0;
 
-    <script>
-        const texts = [
-            "Coming Soon",
-            "قريبًا",
-            "Bientôt disponible",
-            "Próximamente",
-            "Demnächst"
-        ];
+  setInterval(() => {
+    textEl.style.opacity = 0;
+    textEl.style.transform = "translateY(12px)";
 
-        let index = 0;
-        const el = document.getElementById("hello-text");
+    setTimeout(() => {
+      index = (index + 1) % phrases.length;
+      textEl.textContent = phrases[index];
+      textEl.classList.remove("fade");
+      void textEl.offsetWidth; // restart animation
+      textEl.classList.add("fade");
+    }, 300);
+  }, 2200);
+</script>
 
-        setInterval(() => {
-            index = (index + 1) % texts.length;
-            el.textContent = texts[index];
-        }, 2500);
-    </script>
 </body>
 </html>
