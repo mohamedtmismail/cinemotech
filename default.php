@@ -83,7 +83,7 @@
       textEl.classList.remove("fade");
       void textEl.offsetWidth; // restart animation
       textEl.classList.add("fade");
-    }, 300);
+    }, 3000);
   }, 2200);
 </script>
 
